@@ -13,6 +13,7 @@ class User {
       try {
         let userData = await db.query("SELECT * FROM users");
         let users = userData.rows.map((user) => new User(user));
+        console.log(userData.rows[0].id);
         resolve(users);
       } catch (err) {
         reject("Error Retrieving Users");
@@ -41,10 +42,16 @@ class User {
         let userData = await db.query("SELECT * FROM users WHERE email = $1", [
           email,
         ]);
+
+        // if (userData.rows.length == 0) {
+        //   resolve([]);
+        // }
+
         let selectedUser = new User(userData.rows[0]);
+        console.log(selectedUser);
         resolve(selectedUser);
       } catch (err) {
-        reject("Error User Does Not Exist");
+        reject(err.message);
       }
     });
   }

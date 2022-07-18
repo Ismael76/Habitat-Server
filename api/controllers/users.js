@@ -17,13 +17,17 @@ async function register(req, res) {
 async function login(req, res) {
   try {
     const user = await User.findUser(req.body.email);
-    if (!user) {
+    console.log(user);
+    if (user.length == 0) {
       throw new Error("User Does Not Exist!");
     }
+
     const authed = bcrypt.compare(req.body.password, user.password);
     if (!!authed) {
-      res.status(200).json({ user: user.username });
+      console.log("I AM IN HERE2");
+      res.status(200).json({ user: user.username, email: user.email });
     } else {
+      console.log("I AM IN HERE3");
       throw new Error("User Could Not Be Authenticated :(");
     }
   } catch (err) {

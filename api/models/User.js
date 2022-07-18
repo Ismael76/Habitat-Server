@@ -29,6 +29,7 @@ class User {
           [username, email, password]
         );
         let newUser = new User(userData.rows[0]);
+        console.log(newUser);
         resolve(newUser);
       } catch (err) {
         reject("Error Registering User");
@@ -39,19 +40,14 @@ class User {
   static findUser(email) {
     return new Promise(async (resolve, reject) => {
       try {
-        let userData = await db.query("SELECT * FROM users WHERE email = $1", [
+        let userData = await db.query("SELECT * FROM users WHERE email = $1;", [
           email,
         ]);
 
-        // if (userData.rows.length == 0) {
-        //   resolve([]);
-        // }
-
         let selectedUser = new User(userData.rows[0]);
-        console.log(selectedUser);
         resolve(selectedUser);
       } catch (err) {
-        reject(err.message);
+        resolve();
       }
     });
   }

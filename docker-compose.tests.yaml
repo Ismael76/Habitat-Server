@@ -1,0 +1,25 @@
+services:
+  api:
+    container_name: test_api
+    environment: 
+      - PGUSER=project2 #can we change this
+      - PGHOST=db
+      - PGPASSWORD=dbpass
+      - PGDATABASE=habitat_test # can this be changed?
+      - PGPORT=5432
+      - NODE_ENV=test
+    depends_on:
+      - db
+    tty: true
+  db:
+    container_name: test_db
+    volumes:
+      - "test_db:/var/lib/postgresql/data"
+    environment: 
+      - POSTGRES_DB=habitat_test # can this be changed?
+      - POSTGRES_PASSWORD=dbpass
+volumes:
+  test_db:
+networks: 
+  default:
+    name: app_test

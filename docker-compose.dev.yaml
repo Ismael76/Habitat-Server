@@ -1,0 +1,29 @@
+services:
+  api:
+    container_name: dev_api
+    ports:
+      - 3000:3000
+    environment:
+      - PGUSER=futureproof # Not sure if this can be changed or not?
+      - PGHOST=db
+      - PGPASSWORD=pass
+      - PGDATABASE=habitat_dev
+      - PGPORT=5432
+      - NODE_ENV=development
+    depends_on:
+      - db
+    command: bash -c "npm install && npm run seedDev && npm run dev"
+  
+  db:
+    container_name: demo_dev_db
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_DB=habitat_dev # not sure if this can be changed or not?
+      - POSTGRES_USER=project2
+      - POSTGRES_PASSWORD=pass
+volumes:
+  dbdata:
+networks:
+  default:
+    name:

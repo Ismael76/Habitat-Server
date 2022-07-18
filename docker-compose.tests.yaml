@@ -2,7 +2,7 @@ services:
   api:
     container_name: test_api
     environment: 
-      - PGUSER=project2 #can we change this
+      - PGUSER=habitat_user #can we change this
       - PGHOST=db
       - PGPASSWORD=dbpass
       - PGDATABASE=habitat_test # can this be changed?

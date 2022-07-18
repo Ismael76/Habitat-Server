@@ -2,12 +2,12 @@ services:
   api:
     container_name: dev_api
     ports:
-      - 3000:3000
+      - 4000:4000
     environment:
       - PGUSER=habitat_user 
       - PGHOST=db
       - PGPASSWORD=pass
-      - PGDATABASE=habitat_dev
+      - PGDATABASE=habitat
       - PGPORT=5432
       - NODE_ENV=development
     depends_on:
@@ -19,11 +19,11 @@ services:
     volumes:
       - "dbdata:/var/lib/postgresql/data"
     environment:
-      - POSTGRES_DB=habitat_dev 
+      - POSTGRES_DB=habitat 
       - POSTGRES_USER=habitat_user
       - POSTGRES_PASSWORD=pass
 volumes:
   dbdata:
 networks:
   default:
-    name:
+    name: habitat_app

@@ -12,7 +12,7 @@ class Habit {
     return new Promise(async (resolve, reject) => {
       try {
         let habitData = await db.query("SELECT * FROM habits");
-        console.log(habitData.rows);
+        
         let habits = habitData.rows.map((habit) => new Habit(habit));
         resolve(habits);
       } catch (err) {

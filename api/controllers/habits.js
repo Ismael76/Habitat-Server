@@ -1,3 +1,4 @@
+
 const Habit = require("../models/Habit");
 
 async function createHabit(req, res) {
@@ -11,11 +12,30 @@ async function createHabit(req, res) {
   }
 }
 
+function verifyToken(req, res, next) {
+    const token = req.headers('authorization');
+    console.log('<----------  token ------------>');
+    console.log(token);
+    console.log('<----------  token ------------>');
+
+    if(token) {
+        JsonWebTokenError.verify(token, "super-secret-password", async (err, data) => {
+            if(err) {
+                res.status(403).json({err: 'invalid token'})
+            } else {
+                next()
+            }
+        })
+    } else {
+        res.status(403).json({err: 'missing token'})
+    }
+}
+
+
+
 async function showHabits(req, res) {
   try {
-    console.log("IN HERE!");
     const habit = await Habit.all;
-    console.log(habit);
     res.status(201).json(habit);
   } catch (err) {
     res.status(422).json({ err });

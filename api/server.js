@@ -9,6 +9,6 @@ server.use(express.json());
 // Root route
 server.get("/", (req, res) => res.send("Hello, world!"));
 
-server.use("/users", routes);
+server.use("/user", routes);
 
 module.exports = server;

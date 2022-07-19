@@ -11,4 +11,4 @@ VALUES
     ('Do JavaScript', 5, 1),
     ('Go Jogging', 2, 1),
     ('Drink Water', 8, 1),
-    ('Go Swimming', 1, 1)
+    ('Go Swimming', 1, 3)

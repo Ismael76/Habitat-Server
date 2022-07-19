@@ -13,9 +13,7 @@ async function createHabit(req, res) {
 
 async function showHabits(req, res) {
   try {
-    console.log("IN HERE!");
     const habit = await Habit.all;
-    console.log(habit);
     res.status(201).json(habit);
   } catch (err) {
     res.status(422).json({ err });

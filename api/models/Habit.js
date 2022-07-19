@@ -5,7 +5,9 @@ class Habit {
     this.id = data.id;
     this.title = data.title;
     this.frequency = data.frequency;
+    this.completed = data.completed;
     this.user_id = data.user_id;
+
   }
 
   static get all() {
@@ -38,6 +40,20 @@ class Habit {
       }
     });
   }
+
+  static get allCompleted() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let habitData = await db.query("SELECT * FROM habits WHERE status = 'true';");
+        
+        let habits = habitData.rows.map((habit) => new Habit(habit));
+        resolve(habits);
+      } catch (err) {
+        reject("Error Retrieving Habits");
+      }
+    });
+  }
+
 }
 
 module.exports = Habit;

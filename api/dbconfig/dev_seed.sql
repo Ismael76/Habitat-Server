@@ -6,9 +6,9 @@ VALUES
     ('Reece', 'someone@tnone.come', '123qwe');
 
 
-INSERT INTO habits (title, frequency, user_id, status) 
+INSERT INTO habits (title, frequency, completed, user_id) 
 VALUES
-    ('Do JavaScript', 5, 1, true),
-    ('Go Jogging', 2, 1, true),
-    ('Drink Water', 8, 1, false),
-    ('Go Swimming', 1, 3, false)
+    -- ('Do JavaScript', 5, 1, "True"),
+    -- ('Go Jogging', 2, 1, "False"),
+    ('Drink Water', 8, 'True', 1),
+    ('Go Swimming', 1, 'True', 3);

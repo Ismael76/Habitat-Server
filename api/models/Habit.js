@@ -1,4 +1,4 @@
-const db = require("../dbConfig/init");
+const db = require("../dbconfig/init");
 
 class Habit {
   constructor(data) {
@@ -23,3 +23,5 @@ class Habit {
     });
   }
 }
+
+module.exports = Habit;

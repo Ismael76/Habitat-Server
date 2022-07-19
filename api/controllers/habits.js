@@ -42,4 +42,13 @@ async function showHabits(req, res) {
   }
 }
 
-module.exports = { createHabit, showHabits };
+async function showCompletedHabits(req, res) {
+  try {
+    const habit = await Habit.all;
+    res.status(201).json(habit);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
+}
+
+module.exports = { createHabit, showHabits, showCompletedHabits };

@@ -4,8 +4,9 @@ const User = require("../models/User");
 async function createHabit(req, res) {
   try {
     //From Front End We Want To Send Frequency, Title Of Habit From The Form & The Email Of Logged In User
-    const { frequency, title, email } = req.body;
-    const habit = await Habit.create(frequency, title, email);
+    const { title, frequency, id } = req.body;
+    const habit = await Habit.create(title, frequency, id);
+    console.log(habit);
     res.status(201).json(habit);
   } catch (err) {
     res.status(422).json({ err });
@@ -21,17 +22,6 @@ async function showAllHabits(req, res) {
     res.status(422).json({ err });
   }
 }
-
-// async function currentUser(req, res) {
-//   try {
-//     if (req.method == "POST") {
-//       const user = await User.findUser(req.body.email);
-//       habits = await Habit.findById(user.id);
-//     }
-//   } catch (err) {
-//     res.status(422).json({ err });
-//   }
-// }
 
 //Shows Habits For Specific Users
 async function showUserHabits(req, res) {

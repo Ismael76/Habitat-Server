@@ -36,13 +36,12 @@ class Habit {
     });
   }
 
-  static create(title, frequency, email) {
+  static create(title, frequency, id) {
     return new Promise(async (resolve, reject) => {
       try {
-        let user = User.findUser(email);
         let createHabit = await db.query(
-          "INSERT INTO books (title, frequency, user_id) VALUES ($1,$2,$3) RETURNING *;",
-          [title, frequency, user.id]
+          "INSERT INTO habits (title, frequency, user_id) VALUES ($1,$2,$3) RETURNING *;",
+          [title, frequency, id]
         );
         resolve(createHabit.rows[0]);
       } catch (err) {

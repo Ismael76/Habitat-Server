@@ -13,7 +13,6 @@ class User {
       try {
         let userData = await db.query("SELECT * FROM users");
         let users = userData.rows.map((user) => new User(user));
-        console.log(userData.rows[0].id);
         resolve(users);
       } catch (err) {
         reject("Error Retrieving Users");
@@ -29,7 +28,6 @@ class User {
           [username, email, password]
         );
         let newUser = new User(userData.rows[0]);
-        console.log(newUser);
         resolve(newUser);
       } catch (err) {
         reject("Error Registering User");

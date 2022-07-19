@@ -8,6 +8,19 @@ class Habit {
     this.user_id = data.user_id;
   }
 
+  static get all() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let habitData = await db.query("SELECT * FROM habits");
+        console.log(habitData.rows);
+        let habits = habitData.rows.map((habit) => new Habit(habit));
+        resolve(habits);
+      } catch (err) {
+        reject("Error Retrieving Habits");
+      }
+    });
+  }
+
   static create(title, frequency, email) {
     return new Promise(async (resolve, reject) => {
       try {

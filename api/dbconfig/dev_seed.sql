@@ -3,4 +3,12 @@ VALUES
     ('Ismael', 'someone@gman.com', 'pass'),
     ('Daiana', 'someone@gone.com', 'password'),
     ('Taro', 'someone@tone.com', 'qwerty'),
-    ('Reece', 'someone@tnone.come', '123qwe')
+    ('Reece', 'someone@tnone.come', '123qwe');
+
+
+INSERT INTO habits (title, frequency, user_id) 
+VALUES
+    ('Do JavaScript', 5, 1),
+    ('Go Jogging', 2, 1),
+    ('Drink Water', 8, 1),
+    ('Go Swimming', 1, 1)

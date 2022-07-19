@@ -13,23 +13,42 @@ describe('user endpoints', () => {
         await api.close()
     })
 
-    it('should return a list of all useres in database', async () => {
+    // show all usrs
+    it('should return a list of all users in database', async () => {
         const res = await request(api).get('/users')
         expect(res.body).toBeDefined()
     });
-
+    //register user
     it('should register a new user ', async () => {
         const res = await request(api).post('/users/register').send(newUser)
         expect(res.body.username).toEqual('King Henry')
         expect(res.body.id).toBeTruthy()
+    });
+    it('should hash passwords of a new user ', async () => {
+        const res = await request(api).post('/users/register').send(newUser)
+        expect(res.body.username).toEqual('King Henry')
+        expect(res.body.password).not.toBe(newUser.password)
+        expect(res.body.password).toBeTruthy()
+    });
+
+    //login user
+    it('should give an error message for a non-existent user ', async () => {
+        const res = await request(api).post('/users/login').send(fakeLogin)
+        expect(res.body.err).toEqual('User Does Not Exist!')
     });
 })
 
 
 //register, login, showUsers
 
+
 const newUser = {
     "username": "King Henry",
     "email":4,
     "password": "iAmTheOneAndOnly"
+}
+
+const fakeLogin = {
+    "email": "notauser@hotmail.com", 
+    "password":"notregistered"
 }

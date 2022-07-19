@@ -44,7 +44,7 @@ async function showHabits(req, res) {
 
 async function showCompletedHabits(req, res) {
   try {
-    const habit = await Habit.all;
+    const habit = await Habit.completed;
     res.status(201).json(habit);
   } catch (err) {
     res.status(422).json({ err });

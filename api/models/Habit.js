@@ -13,7 +13,7 @@ class Habit {
   static get all() {
     return new Promise(async (resolve, reject) => {
       try {
-        let habitData = await db.query("SELECT * FROM habits");
+        let habitData = await db.query("SELECT * FROM habits;");
         
         let habits = habitData.rows.map((habit) => new Habit(habit));
         resolve(habits);
@@ -41,10 +41,11 @@ class Habit {
     });
   }
 
-  static get allCompleted() {
+
+  static get completed() {
     return new Promise(async (resolve, reject) => {
       try {
-        let habitData = await db.query("SELECT * FROM habits WHERE status = 'true';");
+        let habitData = await db.query("SELECT * FROM habits WHERE completed = 't';");
         
         let habits = habitData.rows.map((habit) => new Habit(habit));
         resolve(habits);

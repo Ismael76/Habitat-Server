@@ -5,5 +5,6 @@ CREATE TABLE habits (
     title varchar(200) NOT NULL,
     frequency INT NOT NULL,
     completed BOOLEAN,
+    streak INT,
     user_id INT REFERENCES users (id)
 );

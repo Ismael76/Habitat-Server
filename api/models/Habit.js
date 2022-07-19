@@ -1,4 +1,5 @@
 const db = require("../dbconfig/init");
+const User = require("./User");
 
 class Habit {
   constructor(data) {
@@ -12,11 +13,25 @@ class Habit {
     return new Promise(async (resolve, reject) => {
       try {
         let habitData = await db.query("SELECT * FROM habits");
-        console.log(habitData.rows);
         let habits = habitData.rows.map((habit) => new Habit(habit));
         resolve(habits);
       } catch (err) {
         reject("Error Retrieving Habits");
+      }
+    });
+  }
+
+  static findById(id) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let getHabits = await db.query(
+          `SELECT * FROM habits JOIN users ON habits.user_id=users.id WHERE users.id = $1;`,
+          [id]
+        );
+        let habits = getHabits.rows.map((habit) => new Habit(habit));
+        resolve(habits);
+      } catch (err) {
+        reject("Habits Could Not Be Found For This User!");
       }
     });
   }

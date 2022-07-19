@@ -8,7 +8,7 @@ VALUES
 
 INSERT INTO habits (title, frequency, user_id) 
 VALUES
-    ('Do JavaScript', 5, 1),
-    ('Go Jogging', 2, 1),
-    ('Drink Water', 8, 1),
-    ('Go Swimming', 1, 1)
+    ('Do JavaScript', 5, 4),
+    ('Go Jogging', 2, 4),
+    ('Drink Water', 8, 4),
+    ('Go Swimming', 1, 4)

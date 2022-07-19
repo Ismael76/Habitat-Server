@@ -17,14 +17,14 @@ async function register(req, res) {
 async function login(req, res) {
   try {
     const user = await User.findUser(req.body.email);
-
     if (!user) {
       throw new Error("User Does Not Exist!");
     }
-
-    const authed = await bcrypt.compare(req.body.password, user.password);
+    const authed = req.body.password == user.password;
+    // const authed = await bcrypt.compare(req.body.password, user.password);
     if (!!authed) {
       res.status(200).json({
+        id: user.id,
         user: user.username,
         email: user.email,
         password: user.password,

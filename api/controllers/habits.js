@@ -1,4 +1,5 @@
 const Habit = require("../models/Habit");
+const User = require("../models/User");
 
 async function createHabit(req, res) {
   try {
@@ -11,7 +12,8 @@ async function createHabit(req, res) {
   }
 }
 
-async function showHabits(req, res) {
+//Shows All Habits Stored In Habits Table
+async function showAllHabits(req, res) {
   try {
     const habit = await Habit.all;
     res.status(201).json(habit);
@@ -20,4 +22,26 @@ async function showHabits(req, res) {
   }
 }
 
-module.exports = { createHabit, showHabits };
+// async function currentUser(req, res) {
+//   try {
+//     if (req.method == "POST") {
+//       const user = await User.findUser(req.body.email);
+//       habits = await Habit.findById(user.id);
+//     }
+//   } catch (err) {
+//     res.status(422).json({ err });
+//   }
+// }
+
+//Shows Habits For Specific Users
+async function showUserHabits(req, res) {
+  try {
+    let id = req.params.id;
+    const habits = await Habit.findById(id);
+    res.status(201).json(habits);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
+}
+
+module.exports = { createHabit, showAllHabits, showUserHabits };

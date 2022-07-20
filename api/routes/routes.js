@@ -16,4 +16,6 @@ router.post("/habits/create", habitsController.createHabit);
 router.get("/habits/:id/:habitid", habitsController.showUserSpecificHabit);
 router.patch("/habits/:id/:habitid", habitsController.updateProgression);
 
+router.delete("/habits/:id/:habitid", habitsController.deleteHabit);
+
 module.exports = router;

@@ -43,7 +43,21 @@ class User {
         ]);
 
         let selectedUser = new User(userData.rows[0]);
-        console.log(selectedUser);
+        resolve(selectedUser);
+      } catch (err) {
+        resolve();
+      }
+    });
+  }
+
+  static findUserById(id) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let userData = await db.query("SELECT * FROM users WHERE id = $1;", [
+          id,
+        ]);
+
+        let selectedUser = new User(userData.rows[0]);
         resolve(selectedUser);
       } catch (err) {
         resolve();

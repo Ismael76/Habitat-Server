@@ -1,17 +1,43 @@
 const Habit = require("../models/Habit");
+const User = require("../models/User");
 
 async function createHabit(req, res) {
   try {
-    //From Front End We Want To Send Frequency, Title Of Habit From The Form & The Email Of Logged In User
-    const { frequency, title, email } = req.body;
-    const habit = await Habit.create(frequency, title, email);
+    //From Front End We Want To Send Frequency, Title Of Habit From The Form & The Id Of Logged In User
+    const { title, frequency, id } = req.body;
+    const habit = await Habit.create(title, frequency, id);
+    // console.log(habit);
     res.status(201).json(habit);
   } catch (err) {
     res.status(422).json({ err });
   }
 }
 
-async function showHabits(req, res) {
+function verifyToken(req, res, next) {
+  const token = req.headers("authorization");
+  console.log("<----------  token ------------>");
+  console.log(token);
+  console.log("<----------  token ------------>");
+
+  if (token) {
+    JsonWebTokenError.verify(
+      token,
+      "super-secret-password",
+      async (err, data) => {
+        if (err) {
+          res.status(403).json({ err: "invalid token" });
+        } else {
+          next();
+        }
+      }
+    );
+  } else {
+    res.status(403).json({ err: "missing token" });
+  }
+}
+
+//Shows All Habits Stored In Habits Table
+async function showAllHabits(req, res) {
   try {
     const habit = await Habit.all;
     res.status(201).json(habit);
@@ -20,4 +46,61 @@ async function showHabits(req, res) {
   }
 }
 
-module.exports = { createHabit, showHabits };
+async function showCompletedHabits(req, res) {
+  const habit = await Habit.completed;
+  res.status(201).json(habit);
+}
+
+//Shows Habits For Specific Users
+async function showUserHabits(req, res) {
+  try {
+    let id = req.params.id;
+    const habits = await Habit.findById(id);
+    res.status(201).json(habits);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
+}
+
+//Shows Specific Habits For Users
+async function showUserSpecificHabit(req, res) {
+  try {
+    let habit = req.params.habitid;
+    const habits = await Habit.findHabitById(habit);
+    res.status(201).json(habits);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
+}
+
+async function updateProgression(req, res) {
+  try {
+    let habit = req.params.habitid;
+    const habits = await Habit.updateProgression(habit);
+    res.status(201).json(habits);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
+}
+
+//////////////// update completion //////////////////
+async function updateCompletion(req, res) {
+  try {
+    let habit = req.params.habitid;
+    let statusChange = req.body;
+    let completeStatus = await Habit.updateCompleteStatus(habit, statusChange);
+    res.status(201).json(completeStatus);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
+}
+
+module.exports = {
+  createHabit,
+  showAllHabits,
+  showCompletedHabits,
+  showUserHabits,
+  showUserSpecificHabit,
+  updateProgression,
+  updateCompletion,
+};

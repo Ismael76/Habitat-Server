@@ -57,7 +57,7 @@ class Habit {
   }
 
   static updateCompleteStatus(habitId, statusChange) {
-    console.log("updatecomplete function is running********")
+    console.log("updatecomplete function is running********");
     return new Promise(async (resolve, reject) => {
       try {
         let updateValue = await db.query(
@@ -77,20 +77,22 @@ class Habit {
     return new Promise(async (resolve, reject) => {
       try {
         let currentStreak = await db.query(
-          `SELECT streak FROM habits WHERE id = $1;`, [habitId]
+          `SELECT streak FROM habits WHERE id = $1;`,
+          [habitId]
         );
         let streak = currentStreak.rows[0].streak;
-        streak++
+        streak++;
         let updateStreak = await db.query(
-          `UPDATE habits SET streak = $1 WHERE id = $2 RETURNING *;`, [streak, habitId]
+          `UPDATE habits SET streak = $1 WHERE id = $2 RETURNING *;`,
+          [streak, habitId]
         );
-        console.log("***************** streak is updating *******************")
+        console.log("***************** streak is updating *******************");
         console.log(streak);
         resolve(updateStreak.rows[0]);
       } catch (err) {
-        reject("Streak could not be updated!");
+        reject("Streak Could Not Be Updated!");
       }
-    })
+    });
   }
 
   static updateProgression(habitId) {
@@ -100,7 +102,7 @@ class Habit {
           `SELECT progression, frequency FROM habits WHERE id = $1;`,
           [habitId]
         );
-          
+
         let newProgressionVal = currentValue.rows[0].progression;
 
         if (newProgressionVal === currentValue.rows[0].frequency) {
@@ -113,13 +115,13 @@ class Habit {
           `UPDATE habits SET progression = $1 WHERE id = $2 RETURNING *;`,
           [newProgressionVal, habitId]
         );
-        
+
         //////////// Checks to see if the completed status can be updated ///////////////
         let progressive = currentValue.rows[0].progression;
         let frequent = currentValue.rows[0].frequency;
 
         if (progressive === frequent) {
-          let obj = { completed: "t" }
+          let obj = { completed: "t" };
           this.updateCompleteStatus(habitId, obj);
           this.updateStreak(habitId);
         }
@@ -158,16 +160,17 @@ class Habit {
         );
         resolve(createHabit.rows[0]);
       } catch (err) {
-        reject("Habit could not be created");
+        reject("Habit Could Not Be Created");
       }
     });
   }
 
-  static get completed() {
+  static showUserCompletedHabits(id) {
     return new Promise(async (resolve, reject) => {
       try {
         let habitData = await db.query(
-          "SELECT * FROM habits WHERE completed = 't';"
+          "SELECT * FROM habits WHERE completed = 't' AND user_id = $1;",
+          [id]
         );
 
         let habits = habitData.rows.map((habit) => new Habit(habit));

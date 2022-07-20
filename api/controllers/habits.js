@@ -47,8 +47,13 @@ async function showAllHabits(req, res) {
 }
 
 async function showCompletedHabits(req, res) {
-  const habit = await Habit.completed;
-  res.status(201).json(habit);
+  try {
+    let id = req.params.id;
+    const habits = await Habit.showUserCompletedHabits(id);
+    res.status(201).json(habits);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
 }
 
 //Shows Habits For Specific Users
@@ -98,9 +103,8 @@ async function updateCompletion(req, res) {
 ////////////// updateStreak /////////////////////////
 async function updateStreak(req, res) {
   try {
-    
   } catch (err) {
-    res.status(422).json({ err })
+    res.status(422).json({ err });
   }
 }
 

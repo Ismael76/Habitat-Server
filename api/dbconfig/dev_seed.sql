@@ -13,3 +13,12 @@ VALUES
     ('Go Swimming', 1, 0, 't', 9, 3);
 
 
+INSERT INTO images (src) 
+VALUES
+    ('./images/avatar1.png'),
+    ('./images/avatar2.png'),
+    ('./images/avatar3.png'),
+    ('./images/avatar4.jpg'),
+    ('./images/avatar5.jpg'),
+    ('./images/avatar6.png');
+

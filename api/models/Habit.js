@@ -56,15 +56,14 @@ class Habit {
     });
   }
 
+  //Updates 'Complete' Column For Habits
   static updateCompleteStatus(habitId, statusChange) {
-    console.log("updatecomplete function is running********");
     return new Promise(async (resolve, reject) => {
       try {
         let updateValue = await db.query(
           `UPDATE habits SET completed = $1 WHERE id = $2 RETURNING *;`,
           [statusChange.completed, habitId]
         );
-        console.log(statusChange, "******************updateValue");
         resolve(updateValue.rows[0]);
       } catch (err) {
         reject("Habit Could Not Be updated");
@@ -93,6 +92,7 @@ class Habit {
   //   });
   // }
 
+  //Updates 'Progress' Column For Habits When Frequency === Progression, It Also Increments Streak Column By One
   static updateProgression(habitId) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -143,6 +143,7 @@ class Habit {
   //   });
   // }
 
+  //Create Habit
   static create(title, frequency, id) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -160,6 +161,7 @@ class Habit {
     });
   }
 
+  //Shows Completed Habits For Specific User
   static showUserCompletedHabits(id) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -176,6 +178,7 @@ class Habit {
     });
   }
 
+  //Deletes Habit
   destroy() {
     console.log("SQL query for deleting");
     return new Promise(async (resolve, reject) => {

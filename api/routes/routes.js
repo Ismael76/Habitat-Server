@@ -19,6 +19,10 @@ router.get("/habits/:id/:habitid", habitsController.showUserSpecificHabit);
 router.patch("/habits/:id/:habitid", habitsController.updateProgression);
 // router.patch("/habits/:id/:habitid", habitsController.updateCompletion);
 
+
 //Profile Image Routes
 router.get("/profileImage", profileImageController.getAllImages);
+
+router.delete("/habits/:id/:habitid", habitsController.deleteHabit);
+
 module.exports = router;

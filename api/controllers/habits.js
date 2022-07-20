@@ -3,10 +3,10 @@ const User = require("../models/User");
 
 async function createHabit(req, res) {
   try {
-    //From Front End We Want To Send Frequency, Title Of Habit From The Form & The Email Of Logged In User
+    //From Front End We Want To Send Frequency, Title Of Habit From The Form & The Id Of Logged In User
     const { title, frequency, id } = req.body;
     const habit = await Habit.create(title, frequency, id);
-    console.log(habit);
+    // console.log(habit);
     res.status(201).json(habit);
   } catch (err) {
     res.status(422).json({ err });
@@ -62,9 +62,32 @@ async function showUserHabits(req, res) {
   }
 }
 
+//Shows Specific Habits For Users
+async function showUserSpecificHabit(req, res) {
+  try {
+    let habit = req.params.habitid;
+    const habits = await Habit.findHabitById(habit);
+    res.status(201).json(habits);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
+}
+
+async function updateProgression(req, res) {
+  try {
+    let habit = req.params.habitid;
+    const habits = await Habit.updateProgression(habit);
+    res.status(201).json(habits);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
+}
+
 module.exports = {
   createHabit,
   showAllHabits,
   showCompletedHabits,
   showUserHabits,
+  showUserSpecificHabit,
+  updateProgression,
 };

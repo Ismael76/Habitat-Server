@@ -20,8 +20,8 @@ async function login(req, res) {
     if (!user) {
       throw new Error("User Does Not Exist!");
     }
-    const authed = req.body.password == user.password;
-    // const authed = await bcrypt.compare(req.body.password, user.password);
+    // const authed = req.body.password == user.password;
+    const authed = await bcrypt.compare(req.body.password, user.password);
     if (!!authed) {
       res.status(200).json({
         id: user.id,

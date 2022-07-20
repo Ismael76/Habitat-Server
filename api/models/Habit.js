@@ -6,6 +6,7 @@ class Habit {
     this.id = data.id;
     this.title = data.title;
     this.frequency = data.frequency;
+    this.progress = data.progress;
     this.completed = data.completed;
     this.streak = data.streak;
     this.user_id = data.user_id;

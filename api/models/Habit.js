@@ -44,12 +44,15 @@ class Habit {
   //Gets A Habit By Habit ID
   static findHabitById(id) {
     return new Promise(async (resolve, reject) => {
-      try {
+      try {        
         let getHabit = await db.query(`SELECT * FROM habits WHERE id = $1`, [
           id,
         ]);
-        resolve(getHabit.rows[0]);
+        let habit =  new Habit(getHabit.rows[0]);        
+        resolve(habit);        
+        // resolve(getHabit.rows[0]);
       } catch (err) {
+        
         reject("Habit Could Not Be Found For This User!");
       }
     });
@@ -114,12 +117,11 @@ class Habit {
     });
   }
 
-  destroy(){
-    
+  destroy(){    
     console.log("SQL query for deleting")
     return new Promise(async(resolve, reject) => {
         try {
-          console.log("SQL query for deleting")
+          console.log("SQL query for deleting inside the try")
             await db.query(`DELETE FROM habits WHERE id = $1;`, [ this.id ]);
             resolve('Habit was deleted')
         } catch (err) {

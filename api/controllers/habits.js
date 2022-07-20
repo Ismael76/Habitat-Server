@@ -88,8 +88,10 @@ async function deleteHabit (req, res) {
     console.log("inside the controller")
       const habit = await Habit.findHabitById(req.params.habitid);
       
-      console.log(habit)
-      console.log(habit.destroy())
+      console.log('####################')
+      console.log('habit: ', habit)
+      // console.log(habit.destroy())
+      // console.log(habit.getOwnPropertyNames())
       
       const res = await habit.destroy();     
       

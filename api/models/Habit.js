@@ -72,60 +72,55 @@ class Habit {
     });
   }
 
-  ///////////////////// Streak updating function /////////////////////////////
-  static updateStreak(habitId) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let currentStreak = await db.query(
-          `SELECT streak FROM habits WHERE id = $1;`,
-          [habitId]
-        );
-        let streak = currentStreak.rows[0].streak;
-        streak++;
-        let updateStreak = await db.query(
-          `UPDATE habits SET streak = $1 WHERE id = $2 RETURNING *;`,
-          [streak, habitId]
-        );
-        console.log("***************** streak is updating *******************");
-        console.log(streak);
-        resolve(updateStreak.rows[0]);
-      } catch (err) {
-        reject("Streak Could Not Be Updated!");
-      }
-    });
-  }
+  /******** THIS FUNCTION IS NOT NEEDED ************/
+  // static updateStreak(habitId) {
+  //   return new Promise(async (resolve, reject) => {
+  //     try {
+  //       let currentStreak = await db.query(
+  //         `SELECT streak FROM habits WHERE id = $1;`,
+  //         [habitId]
+  //       );
+  //       let streak = currentStreak.rows[0].streak;
+  //       streak++;
+  //       let updateStreak = await db.query(
+  //         `UPDATE habits SET streak = $1 WHERE id = $2 RETURNING *;`,
+  //         [streak, habitId]
+  //       );
+  //       resolve(updateStreak.rows[0]);
+  //     } catch (err) {
+  //       reject("Streak Could Not Be Updated!");
+  //     }
+  //   });
+  // }
 
   static updateProgression(habitId) {
     return new Promise(async (resolve, reject) => {
       try {
         let currentValue = await db.query(
-          `SELECT progression, frequency FROM habits WHERE id = $1;`,
+          `SELECT progression, frequency, streak FROM habits WHERE id = $1;`,
           [habitId]
         );
 
         let newProgressionVal = currentValue.rows[0].progression;
 
-        if (newProgressionVal === currentValue.rows[0].frequency) {
+        let streak = currentValue.rows[0].streak;
+
+        if (newProgressionVal == currentValue.rows[0].frequency) {
           newProgressionVal = currentValue.rows[0].frequency;
+          streak = currentValue.rows[0].streak;
         } else {
           newProgressionVal = currentValue.rows[0].progression + 1;
+          if (newProgressionVal == currentValue.rows[0].frequency) {
+            streak++;
+            let obj = { completed: "t" };
+            this.updateCompleteStatus(habitId, obj);
+          }
         }
 
         let updateValue = await db.query(
-          `UPDATE habits SET progression = $1 WHERE id = $2 RETURNING *;`,
-          [newProgressionVal, habitId]
+          `UPDATE habits SET progression = $1, streak = $2 WHERE id = $3 RETURNING *;`,
+          [newProgressionVal, streak, habitId]
         );
-
-        //////////// Checks to see if the completed status can be updated ///////////////
-        let progressive = currentValue.rows[0].progression;
-        let frequent = currentValue.rows[0].frequency;
-
-        if (progressive === frequent) {
-          let obj = { completed: "t" };
-          this.updateCompleteStatus(habitId, obj);
-          this.updateStreak(habitId);
-        }
-        ////////////////////////////////////////////////////////////////////////////////
         resolve(updateValue.rows[0]);
       } catch (err) {
         reject("Habit Could Not Be Found For This User!");
@@ -193,20 +188,6 @@ class Habit {
       }
     });
   }
-
-  // destroy(){
-  //   return new Promise(async(resolve, reject) => {
-  //       try {
-  //           const result = await db.query('DELETE FROM books WHERE id = $1 RETURNING author_id;', [ this.id ]);
-  //           const author = await Author.findById(result.rows[0].author_id);
-  //           const books = await author.books;
-  //           if(!books.length){await author.destroy()}
-  //           resolve('Book was deleted')
-  //       } catch (err) {
-  //           reject('Book could not be deleted')
-  //       }
-  //   })
-  // };
 }
 
 module.exports = Habit;

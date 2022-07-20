@@ -21,20 +21,18 @@ async function login(req, res) {
     if (!user) {
       throw new Error("User Does Not Exist!");
     }
-    // const authed = req.body.password == user.password;
-    const authed = await bcrypt.compare(req.body.password, user.password);
+    const authed = req.body.password == user.password;
+    // const authed = await bcrypt.compare(req.body.password, user.password);
     if (!!authed) {
-
-      
       // const playload = {email: user.email, password: user.password }
 
       // const sendToken = ( err, token ) => {
-        // if(err){
-          // throw new Error('Error in token generation')
-        // } res.status(200).json({
-         // success: true,
-         // token: token
-        //})
+      // if(err){
+      // throw new Error('Error in token generation')
+      // } res.status(200).json({
+      // success: true,
+      // token: token
+      //})
       //}
       // jwt.sign(playload, "super-secret-password", {expiresIn:60}, sendToken)
       // res.status(200).json({
@@ -49,7 +47,6 @@ async function login(req, res) {
         email: user.email,
         password: user.password,
       });
-      
     } else {
       throw new Error("User Could Not Be Authenticated :(");
     }

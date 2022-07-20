@@ -180,6 +180,33 @@ class Habit {
       }
     });
   }
+
+  destroy() {
+    console.log("SQL query for deleting");
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log("SQL query for deleting inside the try");
+        await db.query(`DELETE FROM habits WHERE id = $1;`, [this.id]);
+        resolve("Habit was deleted");
+      } catch (err) {
+        reject("Habit could not be deleted");
+      }
+    });
+  }
+
+  // destroy(){
+  //   return new Promise(async(resolve, reject) => {
+  //       try {
+  //           const result = await db.query('DELETE FROM books WHERE id = $1 RETURNING author_id;', [ this.id ]);
+  //           const author = await Author.findById(result.rows[0].author_id);
+  //           const books = await author.books;
+  //           if(!books.length){await author.destroy()}
+  //           resolve('Book was deleted')
+  //       } catch (err) {
+  //           reject('Book could not be deleted')
+  //       }
+  //   })
+  // };
 }
 
 module.exports = Habit;

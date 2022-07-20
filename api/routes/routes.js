@@ -22,4 +22,7 @@ router.get("/completed/:id", habitsController.showCompletedHabits);
 
 //Profile Image Routes
 router.get("/profileImage", profileImageController.getAllImages);
+
+router.delete("/habits/:id/:habitid", habitsController.deleteHabit);
+
 module.exports = router;

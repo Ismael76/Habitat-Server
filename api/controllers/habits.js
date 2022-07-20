@@ -85,6 +85,27 @@ async function updateProgression(req, res) {
     res.status(201).json(habits);
   } catch (err) {
     res.status(422).json({ err });
+  }  
+}
+
+async function deleteHabit (req, res) {
+  try {
+    console.log("inside the controller")
+      const habit = await Habit.findHabitById(req.params.habitid);
+      
+      console.log('####################')
+      console.log('habit: ', habit)
+      // console.log(habit.destroy())
+      // console.log(habit.getOwnPropertyNames())
+      
+      const res = await habit.destroy();     
+      
+      console.log(res + "res")
+      
+      res.status(204).end();
+
+  } catch (err) {
+      res.status(404).json({err});
   }
 }
 
@@ -115,5 +136,9 @@ module.exports = {
   showUserHabits,
   showUserSpecificHabit,
   updateProgression,
+
   updateCompletion,
+
+  deleteHabit
+
 };

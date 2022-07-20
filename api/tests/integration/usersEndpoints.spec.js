@@ -1,6 +1,6 @@
-describe('user endpoints', () => {
+describe('users endpoints', () => {
     let api;
-    beforeEach(async () => {
+    beforeEach( async () => {
         await resetTestDB()
     })
 
@@ -12,7 +12,6 @@ describe('user endpoints', () => {
         console.log('Gracefully stopping test server')
         await api.close()
     })
-
     // show all usrs
     it('should return a list of all users in database', async () => {
         const res = await request(api).get('/users')
@@ -38,10 +37,7 @@ describe('user endpoints', () => {
     });
 })
 
-
 //register, login, showUsers
-
-
 const newUser = {
     "username": "King Henry",
     "email":4,
@@ -52,3 +48,4 @@ const fakeLogin = {
     "email": "notauser@hotmail.com", 
     "password":"notregistered"
 }
+

@@ -1,8 +1,16 @@
-TRUNCATE users, users RESTART IDENTITY;
+-- TRUNCATE line is creating an error which will not allow the db to reset.
+--  TRUNCATE users, habits RESTART IDENTITY;
 
 INSERT INTO users (username, email, password) 
 VALUES
-    ('Ismael', 'ismael@gman.com', 'pass'),
-    ('Daiana', 'daiana@hotmail.com', 'password'),
-    ('Taro', 'taro@yahoo.com', 'qwerty'),
-    ('Reece', 'reece@aol.com', '123qwe')
+    ('Ismael', 'someone@gman.com', 'pass'),
+    ('Daiana', 'someone@gone.com', 'password'),
+    ('Taro', 'someone@tone.com', 'qwerty'),
+    ('Reece', 'someone@tnone.come', '123qwe');
+
+INSERT INTO habits (title, frequency, user_id) 
+VALUES
+    ('Do JavaScript', 5, 1),
+    ('Go Jogging', 2, 1),
+    ('Drink Water', 8, 1),
+    ('Go Swimming', 1, 1);

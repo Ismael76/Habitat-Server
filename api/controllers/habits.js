@@ -95,6 +95,15 @@ async function updateCompletion(req, res) {
   }
 }
 
+////////////// updateStreak /////////////////////////
+async function updateStreak(req, res) {
+  try {
+    
+  } catch (err) {
+    res.status(422).json({ err })
+  }
+}
+
 module.exports = {
   createHabit,
   showAllHabits,

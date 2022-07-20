@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 async function register(req, res) {
   try {
@@ -17,18 +18,38 @@ async function register(req, res) {
 async function login(req, res) {
   try {
     const user = await User.findUser(req.body.email);
-
     if (!user) {
       throw new Error("User Does Not Exist!");
     }
-
+    // const authed = req.body.password == user.password;
     const authed = await bcrypt.compare(req.body.password, user.password);
     if (!!authed) {
+
+      
+      // const playload = {email: user.email, password: user.password }
+
+      // const sendToken = ( err, token ) => {
+        // if(err){
+          // throw new Error('Error in token generation')
+        // } res.status(200).json({
+         // success: true,
+         // token: token
+        //})
+      //}
+      // jwt.sign(playload, "super-secret-password", {expiresIn:60}, sendToken)
+      // res.status(200).json({
+      //   user: user.username,
+      //   email: user.email,
+      //   password: user.password,
+      // });
+
       res.status(200).json({
+        id: user.id,
         user: user.username,
         email: user.email,
         password: user.password,
       });
+      
     } else {
       throw new Error("User Could Not Be Authenticated :(");
     }

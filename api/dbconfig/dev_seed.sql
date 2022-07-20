@@ -6,7 +6,7 @@ VALUES
     ('Reece', 'someone@tnone.come', '123qwe');
 
 
-INSERT INTO habits (title, frequency, progression, completed, streak, user_id) 
+INSERT INTO habits (title, frequency, progress, completed, streak, user_id) 
 VALUES
     ('Do JavaScript', 5, 5, 't', 0, 1),
     ('Go Jogging', 2, 1, 'f', 1, 1),

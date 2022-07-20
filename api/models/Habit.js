@@ -49,6 +49,9 @@ class Habit {
       }
     });
   }
+
+  
+
 }
 
 module.exports = Habit;

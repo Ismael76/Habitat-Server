@@ -59,17 +59,17 @@ class Habit {
     return new Promise(async (resolve, reject) => {
       try {
         let currentValue = await db.query(
-          `SELECT progression FROM habits WHERE id = $1`,
+          `SELECT progression, frequency FROM habits WHERE id = $1`,
           [habitId]
         );
 
-        // if (newProgressionVal > currentValue.rows[0].frequency) {
-        //   resolve(currentValue.rows[0]);
-        // }
+        let newProgressionVal = currentValue.rows[0].progression;
 
-        // console.log("IN HERE");
-
-        let newProgressionVal = currentValue.rows[0].progression + 1;
+        if (newProgressionVal === currentValue.rows[0].frequency) {
+          newProgressionVal = currentValue.rows[0].frequency;
+        } else {
+          newProgressionVal = currentValue.rows[0].progression + 1;
+        }
 
         let updateValue = await db.query(
           `UPDATE habits SET progression = $1 WHERE id = $2 RETURNING *;`,

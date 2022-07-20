@@ -16,7 +16,8 @@ router.get("/habitsCompleted", habitsController.showCompletedHabits);
 router.get("/habits/:id", habitsController.showUserHabits);
 router.post("/habits/create", habitsController.createHabit);
 router.get("/habits/:id/:habitid", habitsController.showUserSpecificHabit);
-router.patch("/habits/:id/:habitid", habitsController.updateProgression);
+// router.patch("/habits/:id/:habitid", habitsController.updateProgression);
+router.patch("/habits/:id/:habitid", habitsController.updateCompletion);
 
 //Profile Image Routes
 router.get("/profileImage", profileImageController.getAllImages);

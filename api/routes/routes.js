@@ -2,15 +2,19 @@ const express = require("express");
 const router = express.Router();
 const usersController = require("../controllers/users");
 const habitsController = require("../controllers/habits");
+const { route } = require("../server");
+
 
 //User Routes
 router.post("/register", usersController.register);
 router.post("/login", usersController.login);
 router.get("/", usersController.showUsers);
 
-//Habit Routes
-// router.get("/habits", habitsController.showUserHabits);
-// router.post("/currentUser", habitsController.showUserHabits);
+router.get("/habits", habitsController.showHabits);
+router.get("/habitsCompleted", habitsController.showCompletedHabits);
+
+
+
 
 router.get("/habits/:id", habitsController.showUserHabits);
 

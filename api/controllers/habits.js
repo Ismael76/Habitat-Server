@@ -1,4 +1,3 @@
-
 const Habit = require("../models/Habit");
 const User = require("../models/User");
 
@@ -14,27 +13,28 @@ async function createHabit(req, res) {
   }
 }
 
-
 function verifyToken(req, res, next) {
-    const token = req.headers('authorization');
-    console.log('<----------  token ------------>');
-    console.log(token);
-    console.log('<----------  token ------------>');
+  const token = req.headers("authorization");
+  console.log("<----------  token ------------>");
+  console.log(token);
+  console.log("<----------  token ------------>");
 
-    if(token) {
-        JsonWebTokenError.verify(token, "super-secret-password", async (err, data) => {
-            if(err) {
-                res.status(403).json({err: 'invalid token'})
-            } else {
-                next()
-            }
-        })
-    } else {
-        res.status(403).json({err: 'missing token'})
-    }
+  if (token) {
+    JsonWebTokenError.verify(
+      token,
+      "super-secret-password",
+      async (err, data) => {
+        if (err) {
+          res.status(403).json({ err: "invalid token" });
+        } else {
+          next();
+        }
+      }
+    );
+  } else {
+    res.status(403).json({ err: "missing token" });
+  }
 }
-
-
 
 //Shows All Habits Stored In Habits Table
 async function showAllHabits(req, res) {
@@ -47,11 +47,9 @@ async function showAllHabits(req, res) {
 }
 
 async function showCompletedHabits(req, res) {
-    const habit = await Habit.completed;
-    res.status(201).json(habit);
-
+  const habit = await Habit.completed;
+  res.status(201).json(habit);
 }
-
 
 //Shows Habits For Specific Users
 async function showUserHabits(req, res) {
@@ -64,4 +62,9 @@ async function showUserHabits(req, res) {
   }
 }
 
-module.exports = { createHabit, showAllHabits, showCompletedHabits, showUserHabits };
+module.exports = {
+  createHabit,
+  showAllHabits,
+  showCompletedHabits,
+  showUserHabits,
+};

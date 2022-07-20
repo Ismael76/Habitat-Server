@@ -180,14 +180,12 @@ class Habit {
 
   //Deletes Habit
   destroy() {
-    console.log("SQL query for deleting");
     return new Promise(async (resolve, reject) => {
       try {
-        console.log("SQL query for deleting inside the try");
         await db.query(`DELETE FROM habits WHERE id = $1;`, [this.id]);
-        resolve("Habit was deleted");
+        resolve("Habit Was Deleted!");
       } catch (err) {
-        reject("Habit could not be deleted");
+        reject("Habit Could Not Be Deleted");
       }
     });
   }

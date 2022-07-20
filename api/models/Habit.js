@@ -82,6 +82,20 @@ class Habit {
     });
   }
 
+  static updateCompleteStatus(habitId, statusChange) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let updateValue = await db.query(
+          `UPDATE habits SET completed = $1 WHERE id = $2 RETURNING *;`,
+          [statusChange.completed, habitId]
+        );
+        resolve(updateValue.rows[0]);
+      } catch (err) {
+        reject("Habit Could Not Be updated");
+      }
+    });
+  }
+
   static create(title, frequency, id) {
     return new Promise(async (resolve, reject) => {
       try {

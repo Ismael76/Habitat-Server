@@ -5,14 +5,17 @@ class Habit {
     this.id = data.id;
     this.title = data.title;
     this.frequency = data.frequency;
+    this.completed = data.completed;
+    this.streak = data.streak;
     this.user_id = data.user_id;
+
   }
 
   static get all() {
     return new Promise(async (resolve, reject) => {
       try {
-        let habitData = await db.query("SELECT * FROM habits");
-        console.log(habitData.rows);
+        let habitData = await db.query("SELECT * FROM habits;");
+        
         let habits = habitData.rows.map((habit) => new Habit(habit));
         resolve(habits);
       } catch (err) {
@@ -21,20 +24,38 @@ class Habit {
     });
   }
 
+
   static create(title, frequency, email) {
     return new Promise(async (resolve, reject) => {
       try {
         let user = User.findUser(email);
         let createHabit = await db.query(
-          "INSERT INTO books (title, frequency, user_id) VALUES ($1,$2,$3) RETURNING *;",
+
+          "INSERT INTO habits (title, frequency, user_id) VALUES ($1,$2,$3) RETURNING *;",
           [title, frequency, user.id]
         );
         resolve(createHabit.rows[0]);
       } catch (err) {
-        reject("Book could not be created");
+        reject("Habit could not be created");
+
       }
     });
   }
+
+
+  static get completed() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let habitData = await db.query("SELECT * FROM habits WHERE completed = 't';");
+        
+        let habits = habitData.rows.map((habit) => new Habit(habit));
+        resolve(habits);
+      } catch (err) {
+        reject("Error Retrieving Habits");
+      }
+    });
+  }
+
 }
 
 module.exports = Habit;

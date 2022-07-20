@@ -24,12 +24,6 @@ describe('Users controller', () => {
     });
 
 
-
-
-
-
-
-
 const newUser = {
     "username": "King Henry",
     "email":4,

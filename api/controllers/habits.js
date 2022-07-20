@@ -104,6 +104,27 @@ async function deleteHabit (req, res) {
   }
 }
 
+//////////////// update completion //////////////////
+async function updateCompletion(req, res) {
+  try {
+    let habit = req.params.habitid;
+    let statusChange = req.body;
+    let completeStatus = await Habit.updateCompleteStatus(habit, statusChange);
+    res.status(201).json(completeStatus);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
+}
+
+////////////// updateStreak /////////////////////////
+async function updateStreak(req, res) {
+  try {
+    
+  } catch (err) {
+    res.status(422).json({ err })
+  }
+}
+
 module.exports = {
   createHabit,
   showAllHabits,
@@ -111,5 +132,9 @@ module.exports = {
   showUserHabits,
   showUserSpecificHabit,
   updateProgression,
+
+  updateCompletion,
+
   deleteHabit
+
 };

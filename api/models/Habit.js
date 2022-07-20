@@ -58,32 +58,95 @@ class Habit {
     });
   }
 
+  static updateCompleteStatus(habitId, statusChange) {
+    console.log("updatecomplete function is running********")
+    return new Promise(async (resolve, reject) => {
+      try {
+        let updateValue = await db.query(
+          `UPDATE habits SET completed = $1 WHERE id = $2 RETURNING *;`,
+          [statusChange.completed, habitId]
+        );
+        console.log(statusChange, "******************updateValue");
+        resolve(updateValue.rows[0]);
+      } catch (err) {
+        reject("Habit Could Not Be updated");
+      }
+    });
+  }
+
+  ///////////////////// Streak updating function /////////////////////////////
+  static updateStreak(habitId) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let currentStreak = await db.query(
+          `SELECT streak FROM habits WHERE id = $1;`, [habitId]
+        );
+        let streak = currentStreak.rows[0].streak;
+        streak++
+        let updateStreak = await db.query(
+          `UPDATE habits SET streak = $1 WHERE id = $2 RETURNING *;`, [streak, habitId]
+        );
+        console.log("***************** streak is updating *******************")
+        console.log(streak);
+        resolve(updateStreak.rows[0]);
+      } catch (err) {
+        reject("Streak could not be updated!");
+      }
+    })
+  }
+
   static updateProgression(habitId) {
     return new Promise(async (resolve, reject) => {
       try {
         let currentValue = await db.query(
-          `SELECT progression FROM habits WHERE id = $1`,
+          `SELECT progression, frequency FROM habits WHERE id = $1;`,
           [habitId]
         );
+          
+        let newProgressionVal = currentValue.rows[0].progression;
 
-        // if (newProgressionVal > currentValue.rows[0].frequency) {
-        //   resolve(currentValue.rows[0]);
-        // }
-
-        // console.log("IN HERE");
-
-        let newProgressionVal = currentValue.rows[0].progression + 1;
+        if (newProgressionVal === currentValue.rows[0].frequency) {
+          newProgressionVal = currentValue.rows[0].frequency;
+        } else {
+          newProgressionVal = currentValue.rows[0].progression + 1;
+        }
 
         let updateValue = await db.query(
           `UPDATE habits SET progression = $1 WHERE id = $2 RETURNING *;`,
           [newProgressionVal, habitId]
         );
+        
+        //////////// Checks to see if the completed status can be updated ///////////////
+        let progressive = currentValue.rows[0].progression;
+        let frequent = currentValue.rows[0].frequency;
+
+        if (progressive === frequent) {
+          let obj = { completed: "t" }
+          this.updateCompleteStatus(habitId, obj);
+          this.updateStreak(habitId);
+        }
+        ////////////////////////////////////////////////////////////////////////////////
         resolve(updateValue.rows[0]);
       } catch (err) {
         reject("Habit Could Not Be Found For This User!");
       }
     });
   }
+
+  // static updateCompleteStatus(obj) {
+  //   return new Promise(async (resolve, reject) => {
+  //     try {
+  //       let updateValue = await db.query(
+  //         `UPDATE habits SET completed = $1 WHERE id = $2 RETURNING *;`,
+  //         [statusChange.completed, habitId]
+  //       );
+  //       console.log(statusChange, "******************updateValue");
+  //       resolve(updateValue.rows[0]);
+  //     } catch (err) {
+  //       reject("Habit Could Not Be updated");
+  //     }
+  //   });
+  // }
 
   static create(title, frequency, id) {
     return new Promise(async (resolve, reject) => {
@@ -117,6 +180,7 @@ class Habit {
     });
   }
 
+
   destroy(){    
     console.log("SQL query for deleting")
     return new Promise(async(resolve, reject) => {
@@ -143,6 +207,7 @@ class Habit {
 //       }
 //   })
 // };
+
 }
 
 module.exports = Habit;

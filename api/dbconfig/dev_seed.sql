@@ -15,10 +15,6 @@ VALUES
 
 INSERT INTO images (src) 
 VALUES
-    ('./images/avatar1.png'),
-    ('./images/avatar2.png'),
-    ('./images/avatar3.png'),
-    ('./images/avatar4.jpg'),
-    ('./images/avatar5.jpg'),
-    ('./images/avatar6.png');
+    ('https://lh3.googleusercontent.com/y_kq-7Il8AEOHu55u4i4NUGYV2TAzpCRuM0z3xul0FqBsoI24eDAHEP0s3zeQvYglu3VBk39YIsZyOQqkJYyTRFb7IyrWL7MbdYH0HA=w1400-k'),
+    ('https://media.contentapi.ea.com/content/dam/eacom/common/pvz-2-cp-30832-featured.png.adapt.crop16x9.575p.png');
 

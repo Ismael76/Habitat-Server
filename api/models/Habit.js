@@ -48,7 +48,8 @@ class Habit {
         let getHabit = await db.query(`SELECT * FROM habits WHERE id = $1`, [
           id,
         ]);
-        resolve(getHabit.rows[0]);
+        let habit = new Habit(getHabit.rows[0]);
+        resolve(habit);
       } catch (err) {
         reject("Habit Could Not Be Found For This User!");
       }
@@ -127,9 +128,6 @@ class Habit {
       }
     });
   }
-
-  
-
 }
 
 module.exports = Habit;

@@ -3,6 +3,7 @@ const User = require('../../../models/User');
 
 jest.mock('../../../models/User');
 
+
 const pg = require('pg');
 jest.mock('pg');
 
@@ -12,26 +13,33 @@ describe('Habit', () => {
     beforeEach(() => jest.clearAllMocks())
     afterAll(() => jest.resetAllMocks())
 
-    describe('all', () => {
+    describe('gets all habits', () => {
         test('it resolves with habits on successful db query', async () => {
             jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({ rows: [{}, {}, {}]});
+                .mockResolvedValueOnce({ rows: [{}, {}, {}, {}]});
             const all = await Habit.all;
-            // expect(all).toHaveLength(16)
+            expect(all).toHaveLength(4)
             expect(all).toBeTruthy();
         })
     });
 
-    describe('create', () => {
-        test('it resolves with dog on successful db query', async () => {
-            let testHabit = {
-                title: 'happy habit', frequency: 9, progression: 90, completed: 'f', streak: 0, id: 99
-           }
-            jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({rows: [ { ...testHabit}] });
-            const result = await Habit.create(habitData);
-            expect(result).toThrow('Book could not be created')
-        })
-    });
+    // describe('get all profile images', () => {
+    //     test('it resolves with all profile images', async () => {
+    //         jest.spyOn(db, 'query')
+    //             .mockResolvedValueOnce({ rows: [{}, {}, {}, {}]});
+    //         const all = await ProfileImage.all;
+    //         expect(all).toHaveLength(1)
+    //         expect(all).toBeTruthy();
+    //     })
+    // });
+    // describe('create', () => {
+    //     test('it resolves with habit on successful db query', async () => {   
+    //         let habitData = {title: 'testing habit', frequency: 6, user_id: 1 }
+    //         jest.spyOn(db, 'query')
+    //         .mockResolvedValueOnce({rows: [ { ...habitData}] });
+    //         const result = await Habit.create(habitData);
+    //         expect(result).toBeInstanceOf(Habit)
+    //     })
+    // });
     
 })

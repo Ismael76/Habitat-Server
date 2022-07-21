@@ -1,20 +1,26 @@
 INSERT INTO users (username, email, password) 
 VALUES
-    ('Ismael', 'someone@gman.com', 'pass'),
-    ('Daiana', 'someone@gone.com', 'password'),
-    ('Taro', 'someone@tone.com', 'qwerty'),
-    ('Reece', 'someone@tnone.come', '123qwe');
+    ('Ismael', 'test@outlook.com', '$2a$12$UAB3s2U5aCEONKBwqyRTpOE0VyPXklQUYwhRQlrFxlIszuBjhrfti'),
+    ('Daiana', 'test2@outlook.com', '$2a$12$UAB3s2U5aCEONKBwqyRTpOE0VyPXklQUYwhRQlrFxlIszuBjhrfti'),
+    ('Taro', 'test3@outlook.com', '$2a$12$oPB5kdhHuJwC7X.itauO3OmAEoOrbckK3aZY4zGDkqp.6yMkzmVLq'),
+    ('Reece', 'test4@outlook.come', '$2a$12$LWLDPBH7tJiGi6P8F.JvJO8rd/xMnW4kMC6XDbjvUSiZhqa1F6WMS');
 
 INSERT INTO habits (title, frequency, progression, completed, streak, user_id) 
 VALUES
-    ('Do JavaScript', 5, 0, 'f', 4, 1),
-    ('Go Jogging', 2, 0, 'f', 2, 1),
-    ('Drink Water', 8, 0, 'f', 7,  1),
-    ('dfdsf', 1, 0, 'f', 3, 1),
-    ('dfdsf', 8, 0, 'f', 7,  1),
-    ('fdsffd', 1, 0, 'f', 11, 1),
-    ('dfdfdsd', 8, 0, 'f', 8,  1),
-    ('Go Swimming', 1, 0, 'f', 32, 1);
+    ('Eat Apples', 2, 0, 'f', 3, 1),
+    ('Drink Water', 8, 0, 'f', 366, 1),
+    ('Go Gym', 1, 0, 'f', 34,  1),
+    ('Study', 1, 0, 'f', 16, 1),
+    ('Eat Meals', 3, 0, 'f', 45,  1),
+    ('Go Jogging', 1, 0, 'f', 21, 1),
+    ('Go For A Walk', 4, 0, 'f', 35, 2),
+    ('Drink Water', 2, 0, 'f', 743, 2);
+    ('Study', 1, 0, 'f', 6, 3),
+    ('Eat Meals', 3, 0, 'f', 29,  3),
+    ('Go Jogging', 1, 0, 'f', 364, 3),
+    ('Go For A Walk', 4, 0, 'f', 364, 3),
+    ('Drink Water', 2, 0, 'f', 6, 3);
+
 
 
 INSERT INTO images (src) 

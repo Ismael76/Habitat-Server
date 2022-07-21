@@ -26,19 +26,19 @@ describe('habits controller', () => {
         })
     });
 
-    // describe('create', () => {
-    //     test('it returns a new dog with a 201 status code', async () => {
-    //         let testDog = {
-    //             id: 1, name: 'Test Dog', age: 2
-    //         }
-    //         jest.spyOn(Dog, 'create')
-    //             .mockResolvedValue(new Dog(testDog));
+    describe('create', () => {
+        test('it returns a new habit with a 201 status code', async () => {
+            let testHabit = {
+                 title: 'happy habit', frequency: 9, progression: 90, completed: 'f', streak: 0, id: 99
+            }
+            jest.spyOn(Habit, 'create')
+                .mockResolvedValue(new Habit(testHabit));
                 
-    //         const mockReq = { body: testDog }
-    //         await dogsController.create(mockReq, mockRes);
-    //         expect(mockStatus).toHaveBeenCalledWith(201);
-    //         expect(mockJson).toHaveBeenCalledWith(new Dog(testDog));
-    //     })
-    // });
+            const mockReq = { body: testHabit }
+            await habitsController.create(mockReq, mockRes);
+            expect(mockStatus).toHaveBeenCalledWith(201);
+            expect(mockJson).toHaveBeenCalledWith(new Dog(testDog));
+        })
+    });
   
 })

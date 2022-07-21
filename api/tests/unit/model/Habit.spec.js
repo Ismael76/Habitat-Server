@@ -23,17 +23,12 @@ describe('Habit', () => {
     });
 
     describe('create', () => {
-        test('it throws an error', async () => {
-            let habitData = { title: 'Test habit', frequency: 3, user_id: 1 }
-            jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({rows: [ { ...habitData, id: 1 }] });
-            const result = await Habit.create(habitData);
-            expect(result).not.toBeTruthy()
-        })
         test('it resolves with dog on successful db query', async () => {
-            let habitData = { title: 'Test title', frequency: 3, user_id: 1 }
+            let testHabit = {
+                title: 'happy habit', frequency: 9, progression: 90, completed: 'f', streak: 0, id: 99
+           }
             jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({rows: [ { ...habitData, id: 1 }] });
+                .mockResolvedValueOnce({rows: [ { ...testHabit}] });
             const result = await Habit.create(habitData);
             expect(result).toThrow('Book could not be created')
         })

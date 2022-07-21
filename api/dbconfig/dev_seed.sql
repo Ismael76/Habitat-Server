@@ -7,10 +7,14 @@ VALUES
 
 INSERT INTO habits (title, frequency, progression, completed, streak, user_id) 
 VALUES
-    ('Do JavaScript', 5, 0, 'f', 0, 1),
-    ('Go Jogging', 2, 0, 'f', 1, 1),
+    ('Do JavaScript', 5, 0, 'f', 4, 1),
+    ('Go Jogging', 2, 0, 'f', 2, 1),
     ('Drink Water', 8, 0, 'f', 7,  1),
-    ('Go Swimming', 1, 0, 'f', 9, 3);
+    ('dfdsf', 1, 0, 'f', 3, 1),
+    ('dfdsf', 8, 0, 'f', 7,  1),
+    ('fdsffd', 1, 0, 'f', 11, 1),
+    ('dfdfdsd', 8, 0, 'f', 8,  1),
+    ('Go Swimming', 1, 0, 'f', 32, 1);
 
 
 INSERT INTO images (src) 

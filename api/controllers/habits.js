@@ -47,8 +47,13 @@ async function showAllHabits(req, res) {
 }
 
 async function showCompletedHabits(req, res) {
-  const habit = await Habit.completed;
-  res.status(201).json(habit);
+  try {
+    let id = req.params.id;
+    const habits = await Habit.showUserCompletedHabits(id);
+    res.status(201).json(habits);
+  } catch (err) {
+    res.status(422).json({ err });
+  }
 }
 
 //Shows Habits For Specific Users
@@ -83,15 +88,14 @@ async function updateProgression(req, res) {
   }
 }
 
-//////////////// update completion //////////////////
-async function updateCompletion(req, res) {
+async function deleteHabit(req, res) {
   try {
-    let habit = req.params.habitid;
-    let statusChange = req.body;
-    let completeStatus = await Habit.updateCompleteStatus(habit, statusChange);
-    res.status(201).json(completeStatus);
+    let habitId = req.params.habitid;
+    const habit = await Habit.findHabitById(habitId);
+    const res = await habit.destroy();
+    res.status(204).send("DELETED!");
   } catch (err) {
-    res.status(422).json({ err });
+    res.status(404).json({ err });
   }
 }
 
@@ -102,5 +106,5 @@ module.exports = {
   showUserHabits,
   showUserSpecificHabit,
   updateProgression,
-  updateCompletion,
+  deleteHabit,
 };

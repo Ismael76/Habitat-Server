@@ -1,5 +1,5 @@
 -- TRUNCATE line is creating an error which will not allow the db to reset.
- TRUNCATE users, habits RESTART IDENTITY;
+ TRUNCATE users, habits, images RESTART IDENTITY;
 
 INSERT INTO users (username, email, password) 
 VALUES
@@ -14,3 +14,7 @@ VALUES
     ('Go Jogging', 2, 1),
     ('Drink Water', 8, 1),
     ('Go Swimming', 1, 1);
+
+INSERT INTO images (src) 
+VALUES
+    ('http://www.testingimage.com');

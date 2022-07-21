@@ -14,12 +14,12 @@ VALUES
     ('Eat Meals', 3, 0, 'f', 45,  1),
     ('Go Jogging', 1, 0, 'f', 21, 1),
     ('Go For A Walk', 4, 0, 'f', 35, 2),
-    ('Drink Water', 2, 0, 'f', 743, 2);
+    ('Drink Water', 2, 0, 'f', 743, 2),
     ('Study', 1, 0, 'f', 6, 3),
     ('Eat Meals', 3, 0, 'f', 29,  3),
     ('Go Jogging', 1, 0, 'f', 364, 3),
     ('Go For A Walk', 4, 0, 'f', 364, 3),
-    ('Drink Water', 2, 0, 'f', 6, 3);
+    ('Drink Water', 2, 0, 'f', 743, 3);
 
 
 

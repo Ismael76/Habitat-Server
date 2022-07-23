@@ -3,7 +3,7 @@ VALUES
     ('Ismael', 'test@outlook.com', '$2a$12$UAB3s2U5aCEONKBwqyRTpOE0VyPXklQUYwhRQlrFxlIszuBjhrfti'),
     ('Daiana', 'test2@outlook.com', '$2a$12$UAB3s2U5aCEONKBwqyRTpOE0VyPXklQUYwhRQlrFxlIszuBjhrfti'),
     ('Taro', 'test3@outlook.com', '$2a$12$oPB5kdhHuJwC7X.itauO3OmAEoOrbckK3aZY4zGDkqp.6yMkzmVLq'),
-    ('Reece', 'test4@outlook.come', '$2a$12$LWLDPBH7tJiGi6P8F.JvJO8rd/xMnW4kMC6XDbjvUSiZhqa1F6WMS');
+    ('Reece', 'test4@outlook.com', '$2a$12$LWLDPBH7tJiGi6P8F.JvJO8rd/xMnW4kMC6XDbjvUSiZhqa1F6WMS');
 
 INSERT INTO habits (title, frequency, progression, completed, streak, user_id) 
 VALUES
@@ -15,11 +15,11 @@ VALUES
     ('Go Jogging', 1, 0, 'f', 21, 1),
     ('Go For A Walk', 4, 0, 'f', 35, 2),
     ('Drink Water', 2, 0, 'f', 743, 2),
-    ('Study', 1, 0, 'f', 6, 3),
-    ('Eat Meals', 3, 0, 'f', 29,  3),
-    ('Go Jogging', 1, 0, 'f', 364, 3),
-    ('Go For A Walk', 4, 0, 'f', 364, 3),
-    ('Drink Water', 2, 0, 'f', 743, 3);
+    ('Study', 1, 0, 'f', 6, 4),
+    ('Eat Meals', 3, 0, 'f', 29,  4),
+    ('Go Jogging', 1, 0, 'f', 364, 4),
+    ('Go For A Walk', 4, 0, 'f', 364, 4),
+    ('Drink Water', 2, 0, 'f', 743, 4);
 
 
 

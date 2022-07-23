@@ -9,7 +9,7 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-cron.schedule("40 20 * * *", function () {
+cron.schedule("0 0 * * *", function () {
   console.log("Scheduler Working!");
   if (shell.exec("node scheduleTask.js").code !== 0) {
     console.log("Something Went Wrong :(");

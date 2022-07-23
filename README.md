@@ -10,7 +10,7 @@ Welcome to Habitat, a habit tracking application. Habitat helps you create new a
 # Features
 
 ### Add Habits
-![addhabit](./images/addhabit.png)
+![addhabit](./images/addhabit.PNG)
 
 - Add habits you want to track on a day to day basis.
 

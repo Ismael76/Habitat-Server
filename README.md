@@ -16,19 +16,19 @@ Welcome to Habitat, a habit tracking application. Habitat helps you create new a
 
 
 ### Track Habits
-![trackhabit](./images/trackhabit.png)
+![trackhabit](./images/trackhabit.PNG)
 
 - A list of all your habits, you can check off habits you complete for the day to earn a streak with that habit to grow your plant!
 - Delete habits you no longer want to track.
 
 
 ### View Completed Habits
-![completedhabit](./images/completedhabit.png) 
+![completedhabit](./images/completedhabit.PNG) 
 
 - View all your completed habits for the day.
 
 ### Profile
-![profilehabit](./images/profilehabit.png) 
+![profilehabit](./images/profilehabit.PNG) 
 - View your top 3 habits in your personal profile page.
 
 
